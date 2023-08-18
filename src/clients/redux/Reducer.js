@@ -15,14 +15,6 @@ const initial = {
   current: null,
 };
 
-const requiredProperties = [
-  "In progress",
-  "Cancelled",
-  "Backlog",
-  "Done",
-  "Todo",
-];
-
 export const Reducer = (state = initial, { type, payload }) => {
   const getUserById = (id) => {
     const user = state.users.find((user) => user.id === id);
@@ -44,7 +36,7 @@ export const Reducer = (state = initial, { type, payload }) => {
       switch (payload.type) {
         // grouping according to status
         case "Status":
-          const groupedByStatus = state.groupedByPriority
+          const groupedByStatus = state.groupedByStatus
             ? state.groupedByStatus
             : state.tickets.reduce((result, ticket) => {
                 const { status } = ticket;
@@ -57,8 +49,15 @@ export const Reducer = (state = initial, { type, payload }) => {
                 });
                 return result;
               }, {});
-          for (const property of requiredProperties) {
-            if (!(property in groupedByStatus)) {
+
+          for (const property of [
+            "In progress",
+            "Cancelled",
+            "Backlog",
+            "Done",
+            "Todo",
+          ]) {
+            if (groupedByStatus !== null && !(property in groupedByStatus)) {
               groupedByStatus[property] = [];
             }
           }
