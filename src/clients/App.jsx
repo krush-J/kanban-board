@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { useDispatch } from "react-redux";
 import CardScreen from "./screens/CardScreen";
@@ -7,12 +7,15 @@ import axios from "axios";
 
 const App = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    document.body.style.zoom = "80%";
+  }, []);
   const fetchAPI = async () => {
     await axios
       .get("https://api.quicksell.co/v1/internal/frontend-assignment")
       .then((response) => dispatch(getData(response.data)));
-      dispatch(groupTickets(localStorage.getItem('grouping') || "Status"))
-      dispatch(sortTickets(localStorage.getItem('sorting') || "Priority"))
+    dispatch(groupTickets(localStorage.getItem("grouping") || "Status"));
+    dispatch(sortTickets(localStorage.getItem("sorting") || "Priority"));
   };
   fetchAPI();
   return (
@@ -21,8 +24,6 @@ const App = () => {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        minHeight: "100vh",
-        background: "#f4f4f9",
       }}
     >
       <Navbar />
