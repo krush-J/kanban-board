@@ -5,16 +5,14 @@ import CardScreen from "./screens/CardScreen";
 import { getData, groupTickets, sortTickets } from "./redux/Actions";
 import axios from "axios";
 
-
-
 const App = () => {
   const dispatch = useDispatch();
   const fetchAPI = async () => {
     await axios
       .get("https://api.quicksell.co/v1/internal/frontend-assignment")
       .then((response) => dispatch(getData(response.data)));
-      dispatch(groupTickets("Status"))
-      dispatch(sortTickets("Priority"))
+      dispatch(groupTickets(localStorage.getItem('grouping') || "Status"))
+      dispatch(sortTickets(localStorage.getItem('sorting') || "Priority"))
   };
   fetchAPI();
   return (
