@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-
-import { FilterIcon, HeadDownIcon } from "./icons";
 import { SelectCustom } from "./components";
+import { useDispatch, useSelector } from "react-redux";
+import { groupTickets, sortTickets } from "./redux/Actions";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const grouping = useSelector((state) => state.Reducer.grouping);
+  const sorting = useSelector((state) => state.Reducer.sorting);
+
   const dropdownRef = useRef(null);
   const [dropDown, setDropDown] = useState(false);
-  const [grouping, setGrouping] = useState("Status");
-  const [sorting, setSorting] = useState("Priority");
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -16,40 +17,46 @@ const Navbar = () => {
         setDropDown(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  });
 
-  useEffect(() => {
-    console.log(`${grouping} ${sorting}`);
-  }, [grouping, sorting]);
+  const setGroupingType = (value) => {
+    dispatch(groupTickets(value));
+  };
+
+  const setSortingType = (value) => {
+    dispatch(sortTickets(value));
+  };
 
   return (
     <div
       style={{
-        height: "3rem",
+        height: "3.5rem",
         background: "white",
-        width: "100%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         paddingLeft: "20px",
         color: "#626467",
+        overflow: "visible",
       }}
     >
       {/* Display Button */}
       <div
         style={{
           display: "inline-flex",
-          border: "1px solid #939599",
+          boxShadow: "0px 2px 3px #7c8486",
           borderRadius: "5px",
-          padding: "3px",
-          paddingBottom: "0",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          paddingLeft: "6px",
+          paddingRight: "6px",
           width: "fitContent",
           gap: "5px",
-          cursor:"pointer",
+          cursor: "pointer",
         }}
         onClick={() => setDropDown(!dropDown)}
       >
@@ -60,7 +67,7 @@ const Navbar = () => {
             height: "24px",
           }}
         >
-          <FilterIcon />
+          <i class="bi bi-sliders2"></i>
         </span>
         <span
           style={{
@@ -69,15 +76,14 @@ const Navbar = () => {
         >
           Display
         </span>
-
         <span
           style={{
-            paddingTop: "4px",
+            paddingTop: "2px",
             width: "20px",
             height: "24px",
           }}
         >
-          <HeadDownIcon />
+          <i class="bi bi-chevron-down"></i>
         </span>
       </div>
 
@@ -87,16 +93,19 @@ const Navbar = () => {
           ref={dropdownRef}
           style={{
             position: "absolute",
-            top: "2.7rem",
+            top: "3rem",
             width: "15rem",
-            background: "#f9f9fa",
-            border: "1px solid #939599",
+            background: "#f4f4f9",
+
+            boxShadow: "0px 2px 3px #7c8486",
             borderRadius: "5px",
             padding: "8px",
             display: "flex",
             flexDirection: "column",
+            zIndex: 1,
           }}
         >
+          {/* grouping row */}
           <div
             style={{
               width: "100%",
@@ -111,11 +120,12 @@ const Navbar = () => {
               <SelectCustom
                 options={["Status", "User", "Priority"]}
                 selected={grouping}
-                setSelected={setGrouping}
+                setSelected={setGroupingType}
               />
             </span>
           </div>
 
+          {/* Ordering Row */}
           <div
             style={{
               width: "100%",
@@ -129,7 +139,7 @@ const Navbar = () => {
               <SelectCustom
                 options={["Priority", "Title"]}
                 selected={sorting}
-                setSelected={setSorting}
+                setSelected={setSortingType}
               />
             </span>
           </div>
