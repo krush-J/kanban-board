@@ -1,9 +1,36 @@
-import React from 'react'
+import React from "react";
+import Navbar from "./Navbar";
+import { useDispatch } from "react-redux";
+import CardScreen from "./screens/CardScreen";
+import { getData, groupTickets, sortTickets } from "./redux/Actions";
+import axios from "axios";
+
+
 
 const App = () => {
+  const dispatch = useDispatch();
+  const fetchAPI = async () => {
+    await axios
+      .get("https://api.quicksell.co/v1/internal/frontend-assignment")
+      .then((response) => dispatch(getData(response.data)));
+      dispatch(groupTickets("Status"))
+      dispatch(sortTickets("Priority"))
+  };
+  fetchAPI();
   return (
-    <div>App</div>
-  )
-}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        minHeight: "100vh",
+        background: "#f4f4f9",
+      }}
+    >
+      <Navbar />
+      <CardScreen />
+    </div>
+  );
+};
 
-export default App
+export default App;
