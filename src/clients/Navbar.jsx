@@ -24,10 +24,12 @@ const Navbar = () => {
   });
 
   const setGroupingType = (value) => {
+    localStorage.setItem("grouping", value);
     dispatch(groupTickets(value));
   };
 
   const setSortingType = (value) => {
+    localStorage.setItem("sorting", value);
     dispatch(sortTickets(value));
   };
 
