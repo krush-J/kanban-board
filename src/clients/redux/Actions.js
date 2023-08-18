@@ -15,7 +15,7 @@ export const getData = ({tickets, users}) => ({
 /**
  * 
  * @param {*} type on which basis grouping should be formed 
- * @returns Object required for grouping
+ * @returns Object required for grouping.
  */
 export const groupTickets = (type) => ({
     type:ACTION_GROUPING,
