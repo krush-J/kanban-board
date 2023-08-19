@@ -13,7 +13,7 @@ const CardScreen = () => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(auto-fit, minmax(270px, 1fr))`, // Each column is a multiple of 260px
+        gridTemplateColumns: `repeat(auto-fit, minmax(300px, 1fr))`, // Each column is a multiple of 260px
         width: "100%",
         gap: "1rem", // Adjust gap between columns
         margin: "0 auto", // Center the grid horizontally
