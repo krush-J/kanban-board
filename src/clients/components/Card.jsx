@@ -43,8 +43,8 @@ const Card = ({ ticket }) => {
     <div
       style={{
         width: "100%",
-        maxWidth: "270px",
-        minWidth: "250px",
+        maxWidth: "300px",
+        minWidth: "280px",
         background: "white",
         borderRadius: "10px",
         minHeight: "auto",
@@ -107,7 +107,7 @@ const Card = ({ ticket }) => {
         <div
           style={{
             height: "3rem",
-            maxHeight: "3em",
+            maxHeight: "2.7em",
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
             WebkitLineClamp: 2,
