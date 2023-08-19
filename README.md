@@ -1,4 +1,7 @@
 # Solution : Kanban Board
+
+[see here.](https://krush-j.github.io/kanban-board/)
+
 ### Display State
 ### Grouping by priority is selected.
 ![my design](image.png)
