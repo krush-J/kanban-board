@@ -43,7 +43,6 @@ export const Reducer = (state = initial, { type, payload }) => {
                 const { name, available } = getUserById(ticket.userId);
                 (result[status] ??= []).push({
                   ...ticket,
-                  user: getUserById(ticket.userId),
                   userName: name,
                   userAvailable: available,
                 });
