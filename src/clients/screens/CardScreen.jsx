@@ -15,7 +15,7 @@ const CardScreen = () => {
         display: "grid",
         gridTemplateColumns: `repeat(auto-fit, minmax(300px, 1fr))`, // Each column is a multiple of 260px
         width: "100%",
-        gap: "1.3rem", // Adjust gap between columns
+        gap: "1.5rem", // Adjust gap between columns
         margin: "0 auto", // Center the grid horizontally
         paddingTop: "1rem",
         paddingBottom: "1rem",
