@@ -8,7 +8,7 @@ import axios from "axios";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    document.body.style.zoom = "80%";
+    document.body.style.zoom = "90%";
   }, []);
   const fetchAPI = async () => {
     await axios
